@@ -1,3 +1,4 @@
+// Package env provides helpers functions to load different variable types from the environment.
 package env
 
 import (
