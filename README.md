@@ -6,6 +6,8 @@
 
 A small utility package to load different types of environment variables.
 
+Made in 🇩🇰 by [maragu](https://www.maragu.dk), maker of [online Go courses](https://www.golang.dk/).
+
 ## Usage
 
 ```shell
