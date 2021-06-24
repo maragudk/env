@@ -90,11 +90,64 @@ func TestGetDurationOrDefault(t *testing.T) {
 	})
 }
 
+func TestLoad(t *testing.T) {
+	t.Run("loads an environment file", func(t *testing.T) {
+		is := is.New(t)
+		defer unsetenv("hat", "hats")
+		err := env.Load("testdata/env")
+		is.NoErr(err)
+		hat := env.GetStringOrDefault("hat", "regular")
+		is.Equal("party", hat)
+		hats := env.GetIntOrDefault("hats", 1)
+		is.Equal(2, hats)
+	})
+
+	t.Run("errors on bad file", func(t *testing.T) {
+		is := is.New(t)
+		err := env.Load("testdata/invalid")
+		is.True(err != nil)
+		is.Equal("missing equal sign on line 1 in testdata/invalid", err.Error())
+	})
+}
+
+func TestMustLoad(t *testing.T) {
+	t.Run("loads an environment file", func(t *testing.T) {
+		is := is.New(t)
+		defer unsetenv("hat", "hats")
+		env.MustLoad("testdata/env")
+		hat := env.GetStringOrDefault("hat", "regular")
+		is.Equal("party", hat)
+		hats := env.GetIntOrDefault("hats", 1)
+		is.Equal(2, hats)
+	})
+
+	t.Run("panics on no such file", func(t *testing.T) {
+		is := is.New(t)
+		recovered := false
+		defer func() {
+			if err := recover(); err != nil {
+				recovered = true
+			}
+			is.True(recovered)
+		}()
+		env.MustLoad()
+
+	})
+}
+
 func setenv(k, v string) func() {
 	if err := os.Setenv(k, v); err != nil {
 		panic(err)
 	}
 	return func() {
+		if err := os.Unsetenv(k); err != nil {
+			panic(err)
+		}
+	}
+}
+
+func unsetenv(ks ...string) {
+	for _, k := range ks {
 		if err := os.Unsetenv(k); err != nil {
 			panic(err)
 		}
