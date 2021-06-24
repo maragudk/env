@@ -25,6 +25,7 @@ import (
 )
 
 func main() {
+  env.MustLoad()
   host := env.GetStringOrDefault("HOST", "localhost")
   port := env.GetIntOrDefault("PORT", 8080)
   tls := env.GetBoolOrDefault("TLS_ENABLED", false)
