@@ -2,7 +2,7 @@
 
 [![GoDoc](https://godoc.org/github.com/maragudk/env?status.svg)](https://godoc.org/github.com/maragudk/env)
 [![Go](https://github.com/maragudk/env/actions/workflows/go.yml/badge.svg)](https://github.com/maragudk/env/actions/workflows/go.yml)
-[![codecov](https://codecov.io/gh/maragudk/env/branch/master/graph/badge.svg)](https://codecov.io/gh/maragudk/env)
+[![codecov](https://codecov.io/gh/maragudk/env/branch/main/graph/badge.svg)](https://codecov.io/gh/maragudk/env)
 
 A small utility package to load different types of environment variables.
 
