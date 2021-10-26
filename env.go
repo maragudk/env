@@ -73,7 +73,7 @@ func Load(paths ...string) error {
 		for s.Scan() {
 			i++
 			line := s.Text()
-			parts := strings.Split(line, "=")
+			parts := strings.SplitN(line, "=", 2)
 			if len(parts) < 2 {
 				return fmt.Errorf("missing equal sign on line %v in %v", i, path)
 			}

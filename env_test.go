@@ -93,7 +93,7 @@ func TestGetDurationOrDefault(t *testing.T) {
 func TestLoad(t *testing.T) {
 	t.Run("loads an environment file", func(t *testing.T) {
 		is := is.New(t)
-		defer unsetenv("hat", "hats")
+		defer unsetenv("hat", "hats", "equals")
 		err := env.Load("testdata/env")
 		is.NoErr(err)
 		hat := env.GetStringOrDefault("hat", "regular")
@@ -108,12 +108,21 @@ func TestLoad(t *testing.T) {
 		is.True(err != nil)
 		is.Equal("missing equal sign on line 1 in testdata/invalid", err.Error())
 	})
+
+	t.Run("gets the string value including equal signs", func(t *testing.T) {
+		is := is.New(t)
+		defer unsetenv("hat", "hats", "equals")
+		err := env.Load("testdata/env")
+		is.NoErr(err)
+		equals := env.GetStringOrDefault("equals", "")
+		is.Equal("somethingwithequalsafter=", equals)
+	})
 }
 
 func TestMustLoad(t *testing.T) {
 	t.Run("loads an environment file", func(t *testing.T) {
 		is := is.New(t)
-		defer unsetenv("hat", "hats")
+		defer unsetenv("hat", "hats", "equals")
 		env.MustLoad("testdata/env")
 		hat := env.GetStringOrDefault("hat", "regular")
 		is.Equal("party", hat)
@@ -131,7 +140,6 @@ func TestMustLoad(t *testing.T) {
 			is.True(recovered)
 		}()
 		env.MustLoad()
-
 	})
 }
 
