@@ -109,6 +109,15 @@ func TestLoad(t *testing.T) {
 		is.Equal("missing equal sign on line 1 in testdata/invalid", err.Error())
 	})
 
+	t.Run("ignore comments in environment file", func(t *testing.T) {
+		is := is.New(t)
+		defer unsetenv("hat", "hats", "equals")
+		err := env.Load("testdata/with_comment")
+		is.NoErr(err)
+		equals := env.GetStringOrDefault("equals", "")
+		is.Equal("somethingwithequalsafter=", equals)
+	})
+
 	t.Run("gets the string value including equal signs", func(t *testing.T) {
 		is := is.New(t)
 		defer unsetenv("hat", "hats", "equals")
