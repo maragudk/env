@@ -10,11 +10,6 @@ import (
 	"time"
 )
 
-const (
-	charComment = '#'
-	// TODO: handle `prefix`, i.e. single and double quote
-)
-
 // GetStringOrDefault value.
 func GetStringOrDefault(name, defaultV string) string {
 	v, ok := os.LookupEnv(name)
@@ -78,9 +73,17 @@ func Load(paths ...string) error {
 		for s.Scan() {
 			i++
 			line := s.Text()
-			if line[0] == charComment {
+
+			// Blank lines
+			if line == "" {
 				continue
 			}
+
+			// Comments
+			if strings.HasPrefix(line, "#") {
+				continue
+			}
+
 			parts := strings.SplitN(line, "=", 2)
 			if len(parts) < 2 {
 				return fmt.Errorf("missing equal sign on line %v in %v", i, path)
