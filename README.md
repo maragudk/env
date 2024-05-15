@@ -11,7 +11,7 @@ Made in 🇩🇰 by [maragu](https://www.maragu.dk), maker of [online Go courses
 ## Usage
 
 ```shell
-go get -u github.com/maragudk/env
+go get github.com/maragudk/env
 ```
 
 ```go
