@@ -1,5 +1,5 @@
-module github.com/maragudk/env
+module maragu.dev/env
 
 go 1.18
 
-require github.com/maragudk/is v0.1.0
+require maragu.dev/is v0.2.0

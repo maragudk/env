@@ -1,8 +1,7 @@
 # env
 
-[![GoDoc](https://godoc.org/github.com/maragudk/env?status.svg)](https://godoc.org/github.com/maragudk/env)
+[![GoDoc](https://pkg.go.dev/badge/maragu.dev/env)](https://pkg.go.dev/maragu.dev/env)
 [![Go](https://github.com/maragudk/env/actions/workflows/ci.yml/badge.svg)](https://github.com/maragudk/env/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/maragudk/env/branch/main/graph/badge.svg)](https://codecov.io/gh/maragudk/env)
 
 A small utility package to load different types of environment variables.
 
@@ -11,7 +10,7 @@ Made in 🇩🇰 by [maragu](https://www.maragu.dk), maker of [online Go courses
 ## Usage
 
 ```shell
-go get github.com/maragudk/env
+go get maragu.dev/env
 ```
 
 ```go
@@ -21,7 +20,7 @@ import (
   "fmt"
   "time"
 
-  "github.com/maragudk/env"
+  "maragu.dev/env"
 )
 
 func main() {

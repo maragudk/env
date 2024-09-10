@@ -5,9 +5,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/maragudk/is"
+	"maragu.dev/is"
 
-	"github.com/maragudk/env"
+	"maragu.dev/env"
 )
 
 func TestGetStringOrDefault(t *testing.T) {
